@@ -1,0 +1,53 @@
+<h2 class="table_pos">スケジュール一覧</h2>
+
+<% if flash[:success] %>
+  <p class="notice bk_color1"><%= flash[:success] %></p>
+<% end %>
+
+<table class="table_pos">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>終日</th>
+      <th>更新日</th>
+      <th>詳細</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% if @schedules.count > 0 %>
+      <% @schedules.each do |post| %>
+        <tr>
+          <td><%= post.id %></td>
+          <td><%= post.title %></td>
+          <td><%= post.start_day.to_s(:datetime_jp) %></td>
+          <td><%= post.end_day.to_s(:datetime_jp) %></td>
+          <td>
+            <% if post.all_day %>
+              <div>◯</div>
+            <% end %>
+          </td>
+          <td><%= post.updated_at.to_s(:datetime_jp_shousai) %></td>
+          <td><%= link_to "詳細", lesson_path(post) %></td>
+          <td><%= link_to "編集", edit_lesson_path(post) %></td>
+          <td><%= button_to "削除", lesson_path(post), method: :delete ,form: { data: { turbo_confirm:"本当に削除しますか？"}} %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="9">現在登録しているスケジュールはありません。</td>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="table_pos">
+  <%= link_to "スケジュール新規登録", :new_lesson %>
+</div>
+
+<footer>
+  <%= render "shared/footer2" %>
+</footer>
