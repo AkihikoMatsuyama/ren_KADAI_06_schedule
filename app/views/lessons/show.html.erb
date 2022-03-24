@@ -1,0 +1,46 @@
+<h2 class="table_pos">スケジュール詳細</h2>
+
+<% if flash[:success] %>
+  <p class="notice bk_color1"><%= flash[:success] %></p>
+<% end %>
+
+<table class="table_pos">
+  <tr>
+    <td class="new_table_td1">タイトル</td>
+    <td class="new_table_td2"><%= @schedule.title %></td>
+  </tr>
+  
+  <tr>
+    <td class="new_table_td1">開始日</td>
+    <td class="new_table_td2"><%= @schedule.start_day.to_s(:datetime_jp) %></td>
+  </tr>
+  
+  <tr>
+    <td class="new_table_td1">終了日</td>
+    <td class="new_table_td2"><%= @schedule.end_day.to_s(:datetime_jp) %></td>
+  </tr>
+  
+  <tr>
+    <td class="new_table_td1">終日</td>
+    <td class="new_table_td2">
+      <% if @schedule.all_day %>
+        <div>◯</div>
+      <% end %>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="new_table_td1">スケジュールメモ</td>
+    <td class="new_table_td2"><%= @schedule.memo %></td>
+  </tr>
+</table>
+
+<div class="table_pos">
+  <%= link_to "スケジュール一覧に戻る", :lessons %>
+  <br>
+  <%= link_to "スケジュールを編集する", :edit_lesson %>
+  <br>
+  <%= button_to "スケジュールを削除", lesson_path(@schedule), method: :delete ,form: { data: { turbo_confirm:"本当に削除しますか？"}} %>
+</div>
+
+<%= render "shared/footer1" %>

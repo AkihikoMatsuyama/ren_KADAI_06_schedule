@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    models:
+      schedule:
+    attributes:
+      schedule:
+        title: タイトル
+        start_day: 開始日
+        end_day: 終了日
+        memo: スケジュールメモ
+    errors:
+      models:
+        schedule:
+          attributes:
+            start_day:
+              blank: をカレンダーから選択してください
+            end_day:
+              blank: をカレンダーから選択してください
